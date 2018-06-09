@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7343763793f51f547b0bdbe40f3659ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Astroid: {fileID: 1462478221483154, guid: 9d4c9c21bdf718342992acf14a45127e, type: 2}
+  Astroid: {fileID: 1972951999461578, guid: 9d4c9c21bdf718342992acf14a45127e, type: 2}
   AstroidList: []
 --- !u!1 &815922719
 GameObject:
@@ -300,7 +300,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 6665345cba2921b4c8b258e49c866215, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -397,6 +397,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1456456609}
+  - component: {fileID: 1456456610}
   m_Layer: 0
   m_Name: RestartGame
   m_TagString: Untagged
@@ -417,6 +418,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1456456610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1456456608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c694f75288251f4a9d3c4bf8d46fb45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1504530852
 Prefab:
   m_ObjectHideFlags: 0
