@@ -24,7 +24,7 @@ public class Shipmovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
 
         transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationForce * Time.deltaTime);
@@ -44,15 +44,17 @@ public class Shipmovement : MonoBehaviour
             {
                 GetComponent<AudioSource>().Play();
             }
-
-            else if (Input.GetAxis("Vertical") < 0)
-            {
-                leftThruster.gameObject.SetActive(true);
-                rightThruster.gameObject.SetActive(true);
-            }
         }
 
-        if(Input.GetAxis("Horizontal") > 0)
+        if (Input.GetAxis("Vertical") < 0)
+        {
+            //print((Input.GetAxis("Vertical")));
+            leftThruster.gameObject.SetActive(true);
+            rightThruster.gameObject.SetActive(true);
+
+        }
+       
+        if (Input.GetAxis("Horizontal") > 0)
         {
             leftThruster.gameObject.SetActive(true);
         }
@@ -60,7 +62,7 @@ public class Shipmovement : MonoBehaviour
         {
             rightThruster.gameObject.SetActive(true);
         }
-        else
+       else if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") >= 0)
         {
             leftThruster.gameObject.SetActive(false);
             rightThruster.gameObject.SetActive(false);
