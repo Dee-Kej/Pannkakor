@@ -23,7 +23,6 @@ public class Shipmovement : MonoBehaviour
         exhaust = GetComponentInChildren<ParticleSystem>();
     }
 
-
     void FixedUpdate()
     {
 
@@ -64,9 +63,6 @@ public class Shipmovement : MonoBehaviour
                 Debug.Log("u hit the astjrnieno)");
             }
         } 
-       
-
-       
 
     }
 
