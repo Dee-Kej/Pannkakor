@@ -10,7 +10,6 @@ public class Fire : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-
             Instantiate(bulletObject, this.transform);
         }
 	}

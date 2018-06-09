@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class AstroidScript : MonoBehaviour
 {
-
+   public static AstroidScript instance;
     SpringJoint2D _Joint;
     [Space]
     Rigidbody2D rb;
 
-    
+    float Rotationvalue;
 
    public static bool _Connected;
-	
-	void Start ()
+
+    private void Awake()
     {
+        instance = this;
+    }
+
+    void Start ()
+    {
+        Rotationvalue = Random.Range(-5f, 5f);
+       
         _Connected = false;
         _Joint = GetComponent<SpringJoint2D>();
         rb = GetComponent<Rigidbody2D>();
@@ -36,6 +43,11 @@ public class AstroidScript : MonoBehaviour
         {
             _Joint.enabled = false;
             rb.drag = 0;
+            transform.Rotate(0, 0,Rotationvalue);
+            if (Rotationvalue == 0)
+            {
+                Rotationvalue = Random.Range(-5f, 5f);
+            }
         }
         
     }
