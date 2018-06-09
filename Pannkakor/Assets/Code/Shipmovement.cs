@@ -10,6 +10,7 @@ public class Shipmovement : MonoBehaviour
     float accelerationForce = 20f;
     float rotationForce = 100f;
     public GameObject bullet;
+    public GameObject projectileSpawn;
     public Rigidbody2D rb;
     public ParticleSystem exhaust;
     public ParticleSystem leftThruster;
@@ -17,6 +18,7 @@ public class Shipmovement : MonoBehaviour
     [Space]
     public Vector2 BoxSize;
     public float angle,Distance;
+
     
     void Start()
     {
@@ -48,7 +50,6 @@ public class Shipmovement : MonoBehaviour
 
         if (Input.GetAxis("Vertical") < 0)
         {
-            //print((Input.GetAxis("Vertical")));
             leftThruster.gameObject.SetActive(true);
             rightThruster.gameObject.SetActive(true);
 
@@ -93,8 +94,7 @@ public class Shipmovement : MonoBehaviour
 
     void ShootBullet()
     {
-        Instantiate(bullet, new Vector3(transform.position.x, transform.position.y),
-            transform.rotation);
+        Instantiate(bullet, projectileSpawn.transform.position, transform.rotation);//new Vector3(transform.position.x, transform.position.y),transform.rotation);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
