@@ -40,7 +40,10 @@ public class Shipmovement : MonoBehaviour
         else if (Input.GetAxis("Vertical") > 0)
         {
             exhaust.gameObject.SetActive(true);
-            GetComponent<AudioSource>().Play();
+            if (!GetComponent<AudioSource>().isPlaying)
+            {
+                GetComponent<AudioSource>().Play();
+            }
         }
 
         if (Input.GetAxis("Vertical") == 0 && rb.angularVelocity != 0)
