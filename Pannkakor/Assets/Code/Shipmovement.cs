@@ -7,11 +7,13 @@ using UnityEngine;
 public class Shipmovement : MonoBehaviour
 {
 
-    float accelerationForce = 10f;
+    float accelerationForce = 20f;
     float rotationForce = 100f;
     public GameObject bullet;
     public Rigidbody2D rb;
     public ParticleSystem exhaust;
+    public ParticleSystem leftThruster;
+    public ParticleSystem rightThruster;
     [Space]
     public Vector2 BoxSize;
     public float angle,Distance;
@@ -43,6 +45,20 @@ public class Shipmovement : MonoBehaviour
             {
                 GetComponent<AudioSource>().Play();
             }
+        }
+
+        if(Input.GetAxis("Horizontal") > 0)
+        {
+            leftThruster.gameObject.SetActive(true);
+        }
+        else if(Input.GetAxis("Horizontal") < 0)
+        {
+            rightThruster.gameObject.SetActive(true);
+        }
+        else
+        {
+            leftThruster.gameObject.SetActive(false);
+            rightThruster.gameObject.SetActive(false);
         }
 
         if (Input.GetAxis("Vertical") == 0 && rb.angularVelocity != 0)
