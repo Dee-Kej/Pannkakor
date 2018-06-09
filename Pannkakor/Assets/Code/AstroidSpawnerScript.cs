@@ -15,7 +15,7 @@ public class AstroidSpawnerScript : MonoBehaviour
 
     void Start()
     {
-        // Astroid = Resources.Load<GameObject>("Prefabs/Astroids");
+       // Astroid = Resources.Load<GameObject>("Prefabs/Asteroid");
         Camvalue = Camera.main.ViewportToWorldPoint(transform.position);
 
         for (float i = Camvalue.x + 1; i < (Camvalue.x * -1); i += 2f)
