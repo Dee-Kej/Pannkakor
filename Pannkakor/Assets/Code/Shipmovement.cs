@@ -22,7 +22,6 @@ public class Shipmovement : MonoBehaviour
     {
 
         rb = GetComponent<Rigidbody2D>();
-        exhaust = GetComponentInChildren<ParticleSystem>();
     }
 
     void FixedUpdate()
@@ -44,6 +43,12 @@ public class Shipmovement : MonoBehaviour
             if (!GetComponent<AudioSource>().isPlaying)
             {
                 GetComponent<AudioSource>().Play();
+            }
+
+            else if (Input.GetAxis("Vertical") < 0)
+            {
+                leftThruster.gameObject.SetActive(true);
+                rightThruster.gameObject.SetActive(true);
             }
         }
 
@@ -75,8 +80,7 @@ public class Shipmovement : MonoBehaviour
         {
             if (Temp[i].transform.CompareTag("Astroid") && Input.GetKeyDown(KeyCode.X))
                 {
-                //AstroidScript.instance._Connected = true;
-                //AstroidScript.instance._Joint.connectedBody = rb;
+
                 Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = true;
                 Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
                 Debug.Log("u hit the astjrnieno)");
