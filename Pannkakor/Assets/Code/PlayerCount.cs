@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCount : MonoBehaviour {
 
     public bool player1, player2, player3, player4;
-    public GameObject pressS, pressK;
+    public GameObject pressS, pressK, pressDown, press5;
 
 
 	// Use this for initialization
@@ -29,5 +29,17 @@ public class PlayerCount : MonoBehaviour {
             Debug.Log("player 2 ready");
             pressK.SetActive(false);
         }
-	}
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && !player3)
+        {
+            player3 = true;
+            Debug.Log("player 3 ready");
+            pressDown.SetActive(false);
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad5) && !player4)
+        {
+            player4 = true;
+            Debug.Log("player 4 ready");
+            press5.SetActive(false);
+        }
+    }
 }
