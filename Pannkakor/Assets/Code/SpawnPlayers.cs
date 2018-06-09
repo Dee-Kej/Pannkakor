@@ -9,24 +9,33 @@ public class SpawnPlayers : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        playerData = GameObject.Find("Persistent PlayerData");
-
-        Debug.Log(playerData.GetComponent<PlayerCount>().player1);
-        if(playerData.GetComponent<PlayerCount>().player1)
+        if(GameObject.Find("Persistent PlayerData") == true)
         {
-            Instantiate(playerPrefab, spawnpoints[0].transform.position, Quaternion.identity);
+            playerData = GameObject.Find("Persistent PlayerData");
         }
-        if (playerData.GetComponent<PlayerCount>().player2)
+        else
         {
-            Instantiate(playerPrefab, spawnpoints[1].transform.position, Quaternion.identity);
+            return;
         }
-        if (playerData.GetComponent<PlayerCount>().player3)
+        if (playerData != null)
         {
-            Instantiate(playerPrefab, spawnpoints[2].transform.position, Quaternion.identity);
-        }
-        if (playerData.GetComponent<PlayerCount>().player4)
-        {
-            Instantiate(playerPrefab, spawnpoints[3].transform.position, Quaternion.identity);
+            Debug.Log(playerData.GetComponent<PlayerCount>().player1);
+            if (playerData.GetComponent<PlayerCount>().player1)
+            {
+                Instantiate(playerPrefab, spawnpoints[0].transform.position, Quaternion.identity);
+            }
+            if (playerData.GetComponent<PlayerCount>().player2)
+            {
+                Instantiate(playerPrefab, spawnpoints[1].transform.position, Quaternion.identity);
+            }
+            if (playerData.GetComponent<PlayerCount>().player3)
+            {
+                Instantiate(playerPrefab, spawnpoints[2].transform.position, Quaternion.identity);
+            }
+            if (playerData.GetComponent<PlayerCount>().player4)
+            {
+                Instantiate(playerPrefab, spawnpoints[3].transform.position, Quaternion.identity);
+            }
         }
     }
 	

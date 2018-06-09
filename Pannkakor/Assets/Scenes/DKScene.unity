@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c55293c9bb54345a6c1e32bf444296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1200795683536852, guid: 0a7737803309cde45982d94601c1ebc3,
+  playerPrefab: {fileID: 1413556908631802, guid: 30351246b9a29d34d858dc10430818fe,
     type: 2}
   spawnpoints:
   - {fileID: 1652499964}
@@ -494,6 +494,10 @@ Prefab:
     - target: {fileID: 4093031946156304, guid: d821b9b857630864b9c80cf245d21dc4, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267262505360700, guid: d821b9b857630864b9c80cf245d21dc4, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d821b9b857630864b9c80cf245d21dc4, type: 2}
