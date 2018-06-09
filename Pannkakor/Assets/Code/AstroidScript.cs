@@ -9,12 +9,14 @@ public class AstroidScript : MonoBehaviour
     [Space]
     Rigidbody2D rb;
 
-    
+    float Rotationvalue;
 
    public static bool _Connected;
 	
 	void Start ()
     {
+        Rotationvalue = Random.Range(-5f, 5f);
+       
         _Connected = false;
         _Joint = GetComponent<SpringJoint2D>();
         rb = GetComponent<Rigidbody2D>();
@@ -36,6 +38,11 @@ public class AstroidScript : MonoBehaviour
         {
             _Joint.enabled = false;
             rb.drag = 0;
+            transform.Rotate(0, 0,Rotationvalue);
+            if (Rotationvalue == 0)
+            {
+                Rotationvalue = Random.Range(-5f, 5f);
+            }
         }
         
     }
