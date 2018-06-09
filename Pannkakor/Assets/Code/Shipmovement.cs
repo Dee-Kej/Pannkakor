@@ -15,9 +15,10 @@ public class Shipmovement : MonoBehaviour
     public ParticleSystem exhaust;
     public ParticleSystem leftThruster;
     public ParticleSystem rightThruster;
+    public ParticleSystem Laser;
     [Space]
-    public Vector2 BoxSize;
-    public float angle,Distance;
+    public Vector2 BoxSize,_ParticlePos;
+    public float angle,_particleStep,RayRange, Distance,DotValue;
     string axisNameH;
     string axisNameV;
     
@@ -77,16 +78,16 @@ public class Shipmovement : MonoBehaviour
             rightThruster.gameObject.SetActive(true);
 
         }
-       
+
         if (Input.GetAxis(axisNameH) > 0)
         {
             leftThruster.gameObject.SetActive(true);
         }
-        else if(Input.GetAxis(axisNameH) < 0)
+        else if (Input.GetAxis(axisNameH) < 0)
         {
             rightThruster.gameObject.SetActive(true);
         }
-       else if (Input.GetAxis(axisNameH) == 0 && Input.GetAxis(axisNameV) >= 0)
+        else if (Input.GetAxis(axisNameH) == 0 && Input.GetAxis(axisNameV) >= 0)
         {
             leftThruster.gameObject.SetActive(false);
             rightThruster.gameObject.SetActive(false);
@@ -100,19 +101,30 @@ public class Shipmovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
             ShootBullet();
 
-        RaycastHit2D[] Temp = Physics2D.BoxCastAll(transform.position, BoxSize, angle, Quaternion.identity.eulerAngles,Distance);
+        RaycastHit2D[] Temp = Physics2D.BoxCastAll(transform.position, BoxSize, angle, Quaternion.identity.eulerAngles, Distance);
+
+       
 
         for (int i = 0; i < Temp.Length; i++)
         {
-            if (Temp[i].transform.CompareTag("Astroid") && Input.GetKeyDown(KeyCode.X))
-                {
+            float dot = Vector2.Dot(transform.up, (Temp[i].transform.position - transform.position).normalized);
+            print(dot);
 
+            // && 
+            if (Temp[i].transform.CompareTag("Astroid") && dot > DotValue && Input.GetKeyDown(KeyCode.X))
+            {
                 Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = true;
                 Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
-                Debug.Log("u hit the astjrnieno)");
+               
             }
-        } 
+  
+            Debug.Log("u hit the astjrnieno at -0.3)");
 
+            if (Temp[i] && dot > DotValue)
+            {
+                Debug.DrawLine(transform.position, Temp[i].transform.position, Color.green);
+            }
+        }
     }
 
     void ShootBullet()
