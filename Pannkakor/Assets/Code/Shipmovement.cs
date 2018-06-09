@@ -7,11 +7,13 @@ using UnityEngine;
 public class Shipmovement : MonoBehaviour
 {
 
-    float accelerationForce = 10f;
+    float accelerationForce = 20f;
     float rotationForce = 100f;
     public GameObject bullet;
     public Rigidbody2D rb;
     public ParticleSystem exhaust;
+    public ParticleSystem leftThruster;
+    public ParticleSystem rightThruster;
     [Space]
     public Vector2 BoxSize;
     public float angle,Distance;
@@ -20,10 +22,9 @@ public class Shipmovement : MonoBehaviour
     {
 
         rb = GetComponent<Rigidbody2D>();
-        exhaust = GetComponentInChildren<ParticleSystem>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
 
         transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationForce * Time.deltaTime);
@@ -45,6 +46,28 @@ public class Shipmovement : MonoBehaviour
             }
         }
 
+        if (Input.GetAxis("Vertical") < 0)
+        {
+            //print((Input.GetAxis("Vertical")));
+            leftThruster.gameObject.SetActive(true);
+            rightThruster.gameObject.SetActive(true);
+
+        }
+       
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            leftThruster.gameObject.SetActive(true);
+        }
+        else if(Input.GetAxis("Horizontal") < 0)
+        {
+            rightThruster.gameObject.SetActive(true);
+        }
+       else if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") >= 0)
+        {
+            leftThruster.gameObject.SetActive(false);
+            rightThruster.gameObject.SetActive(false);
+        }
+
         if (Input.GetAxis("Vertical") == 0 && rb.angularVelocity != 0)
         {
             StabilizeShip();
@@ -59,8 +82,7 @@ public class Shipmovement : MonoBehaviour
         {
             if (Temp[i].transform.CompareTag("Astroid") && Input.GetKeyDown(KeyCode.X))
                 {
-                //AstroidScript.instance._Connected = true;
-                //AstroidScript.instance._Joint.connectedBody = rb;
+
                 Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = true;
                 Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
                 Debug.Log("u hit the astjrnieno)");
