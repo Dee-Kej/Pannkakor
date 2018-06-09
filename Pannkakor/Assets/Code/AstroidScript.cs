@@ -57,9 +57,11 @@ public class AstroidScript : MonoBehaviour
         {
             case "Bullet":
                 transform.localScale *= 1.15f;
+                GetComponent<AudioSource>().Play();
                 break;
             case "Ship":
                 Destroy(collision.gameObject);
+                GetComponent<AudioSource>().Play();
                 break;
             default:
                 Debug.Log("Unknown Collision");
