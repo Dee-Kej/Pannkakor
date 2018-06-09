@@ -15,7 +15,7 @@ public class AstroidScript : MonoBehaviour
 	
 	void Start ()
     {
-        _Connected = true;
+        _Connected = false;
         _Joint = GetComponent<SpringJoint2D>();
         rb = GetComponent<Rigidbody2D>();
         _Joint.enabled = false;
@@ -37,6 +37,6 @@ public class AstroidScript : MonoBehaviour
             _Joint.enabled = false;
             rb.drag = 0;
         }
-        print("Joint is " + _Joint.isActiveAndEnabled + " And Connected is " + _Connected);      
+        
     }
 }
