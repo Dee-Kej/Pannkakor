@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1417007214496400, guid: 722cda57462ed7f4bb450883f3c8f689, type: 2}
+  projectileSpawn: {fileID: 1089933511172518}
   rb: {fileID: 0}
   exhaust: {fileID: 198575303579740296}
   leftThruster: {fileID: 198616881770265058}
