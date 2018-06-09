@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour {
+    public GameObject playerPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +15,7 @@ public class StartGame : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("DKScene");
+            SceneManager.LoadScene(1);
         }
 	}
 }
