@@ -8,7 +8,7 @@ public class AstroidScript : MonoBehaviour
    public SpringJoint2D _Joint;
     [Space]
     Rigidbody2D rb;
-
+    Animator animator;
     float Rotationvalue;
 
     public  bool _Connected;
@@ -21,7 +21,7 @@ public class AstroidScript : MonoBehaviour
     void Start()
     {
         Rotationvalue = Random.Range(-5f, 5f);
-
+        animator = GetComponent<Animator>();
         _Connected = false;
         _Joint = GetComponent<SpringJoint2D>();
         rb = GetComponent<Rigidbody2D>();
@@ -50,6 +50,9 @@ public class AstroidScript : MonoBehaviour
                 Rotationvalue = Random.Range(-5f, 5f);
             }
         }
+        
+        
+
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -58,6 +61,7 @@ public class AstroidScript : MonoBehaviour
         {
             case "Bullet":
                 transform.localScale *= 1.05f;
+                animator.SetFloat("Scale", transform.localScale.x);
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player1":
