@@ -135,7 +135,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 90e523cc3b9600145a4150444cd4392c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.089
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -233,6 +233,9 @@ MonoBehaviour:
   bullet: {fileID: 1417007214496400, guid: 722cda57462ed7f4bb450883f3c8f689, type: 2}
   rb: {fileID: 0}
   exhaust: {fileID: 0}
+  BoxSize: {x: 0, y: 0}
+  angle: 0
+  Distance: 0
 --- !u!198 &198529043373330416
 ParticleSystem:
   m_ObjectHideFlags: 1
