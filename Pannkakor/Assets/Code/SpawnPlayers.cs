@@ -14,10 +14,12 @@ public class SpawnPlayers : MonoBehaviour {
         {
             playerData = GameObject.Find("Persistent PlayerData");
         }
+
         else
         {
             return;
         }
+
         if (playerData != null)
         {
             Debug.Log(playerData.GetComponent<PlayerCount>().player1);
@@ -51,5 +53,4 @@ public class SpawnPlayers : MonoBehaviour {
             }
         }
     }
-	
 }
