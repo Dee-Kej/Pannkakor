@@ -18,28 +18,51 @@ public class Shipmovement : MonoBehaviour
     [Space]
     public Vector2 BoxSize;
     public float angle,Distance;
-
+    string axisNameH;
+    string axisNameV;
     
     void Start()
     {
-
+        switch (gameObject.tag)
+        {
+            case "Player1":
+                axisNameH = "Horizontal";
+                axisNameV = "Vertical";
+                break;
+            case "Player2":
+                axisNameH = "Horizontal2";
+                axisNameV = "Vertical2";
+                break;
+            case "Player3":
+                axisNameH = "Horizontal3";
+                axisNameV = "Vertical3";
+                break;
+            case "Player4":
+                axisNameH = "Horizontal4";
+                axisNameV = "Vertical4";
+                break;
+            default:
+                break;
+        }
+        
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
 
-        transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationForce * Time.deltaTime);
+
+        transform.Rotate(0, 0, -Input.GetAxis(axisNameH) * rotationForce * Time.deltaTime);
 
 
-        rb.AddForce(transform.up * accelerationForce * Input.GetAxis("Vertical"));
+        rb.AddForce(transform.up * accelerationForce * Input.GetAxis(axisNameV));
 
-        if (Input.GetAxis("Vertical") == 0)
+        if (Input.GetAxis(axisNameV) == 0)
         {
             GetComponent<AudioSource>().Stop();
             exhaust.gameObject.SetActive(false);
         }
-        else if (Input.GetAxis("Vertical") > 0)
+        else if (Input.GetAxis(axisNameV) > 0)
         {
             exhaust.gameObject.SetActive(true);
             if (!GetComponent<AudioSource>().isPlaying)
@@ -48,28 +71,28 @@ public class Shipmovement : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis("Vertical") < 0)
+        if (Input.GetAxis(axisNameV) < 0)
         {
             leftThruster.gameObject.SetActive(true);
             rightThruster.gameObject.SetActive(true);
 
         }
        
-        if (Input.GetAxis("Horizontal") > 0)
+        if (Input.GetAxis(axisNameH) > 0)
         {
             leftThruster.gameObject.SetActive(true);
         }
-        else if(Input.GetAxis("Horizontal") < 0)
+        else if(Input.GetAxis(axisNameH) < 0)
         {
             rightThruster.gameObject.SetActive(true);
         }
-       else if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") >= 0)
+       else if (Input.GetAxis(axisNameH) == 0 && Input.GetAxis(axisNameV) >= 0)
         {
             leftThruster.gameObject.SetActive(false);
             rightThruster.gameObject.SetActive(false);
         }
 
-        if (Input.GetAxis("Vertical") == 0 && rb.angularVelocity != 0)
+        if (Input.GetAxis(axisNameV) == 0 && rb.angularVelocity != 0)
         {
             StabilizeShip();
         }
