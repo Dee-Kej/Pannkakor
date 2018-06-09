@@ -34,6 +34,7 @@ public class Shipmovement : MonoBehaviour
 
         if (Input.GetAxis("Vertical") == 0)
         {
+            GetComponent<AudioSource>().Stop();
             exhaust.gameObject.SetActive(false);
         }
         else if (Input.GetAxis("Vertical") > 0)
@@ -50,7 +51,7 @@ public class Shipmovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
             ShootBullet();
 
-        RaycastHit2D[] Temp = Physics2D.BoxCastAll(transform.position, BoxSize, angle, Quaternion.identity.ToEulerAngles(),Distance);
+        RaycastHit2D[] Temp = Physics2D.BoxCastAll(transform.position, BoxSize, angle, Quaternion.identity.eulerAngles,Distance);
 
         for (int i = 0; i < Temp.Length; i++)
         {
