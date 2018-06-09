@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 
 public class Bullet : MonoBehaviour {
+
+    public AudioClip[] audioclips;
+
 
     
 	// Use this for initialization
 	void Start () {
-        GetComponent<Rigidbody>().AddForce(transform.up * 1000);
+        GetComponent<Rigidbody2D>().AddForce(transform.up * 1000);
         Debug.Log("Waking up");
+        GetComponent<AudioSource>().clip = audioclips[Random.Range(0, audioclips.Length-1)];
+        GetComponent<AudioSource>().Play();
 	}
 	
-    void OnTriggerEnter(Collider collider)
+    void OnTriggerEnter2D(Collider2D collider)
     {
         switch (collider.gameObject.name)
         {
