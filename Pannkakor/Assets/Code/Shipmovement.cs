@@ -59,9 +59,9 @@ public class Shipmovement : MonoBehaviour
         {
             if (Temp[i].transform.CompareTag("Astroid") && Input.GetKeyDown(KeyCode.X))
                 {
-                AstroidScript.instance._Connected = true;
+                //AstroidScript.instance._Connected = true;
                 //AstroidScript.instance._Joint.connectedBody = rb;
-                
+                Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = true;
                 Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
                 Debug.Log("u hit the astjrnieno)");
             }

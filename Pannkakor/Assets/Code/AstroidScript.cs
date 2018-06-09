@@ -38,6 +38,7 @@ public class AstroidScript : MonoBehaviour
         if (_Connected)
         {
             _Joint.enabled = true;
+            rb.drag = 2.5f;
         }
         else if (!_Connected)
         {
@@ -53,15 +54,28 @@ public class AstroidScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (collision.gameObject.name)
+        switch (collision.gameObject.tag)
         {
             case "Bullet":
-                transform.localScale *= 1.15f;
+                transform.localScale *= 1.05f;
                 GetComponent<AudioSource>().Play();
                 break;
-            case "Ship":
+            case "Player1":
                 Destroy(collision.gameObject);
                 GetComponent<AudioSource>().Play();
+                break;
+            case "Player2":
+                Destroy(collision.gameObject);
+                GetComponent<AudioSource>().Play();
+                break;
+            case "Player3":
+                Destroy(collision.gameObject);
+                GetComponent<AudioSource>().Play();
+                break;
+            case "Player4":
+                Destroy(collision.gameObject);
+                GetComponent<AudioSource>().Play();
+
                 break;
             default:
                 Debug.Log("Unknown Collision");
