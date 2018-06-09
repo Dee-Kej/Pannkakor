@@ -5,13 +5,13 @@ using UnityEngine;
 public class AstroidScript : MonoBehaviour
 {
     public static AstroidScript instance;
-    SpringJoint2D _Joint;
+   public SpringJoint2D _Joint;
     [Space]
     Rigidbody2D rb;
 
     float Rotationvalue;
 
-    public static bool _Connected;
+    public  bool _Connected;
 
     private void Awake()
     {

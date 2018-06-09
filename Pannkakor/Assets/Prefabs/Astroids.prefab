@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 82856430044719746}
   m_Layer: 0
   m_Name: Astroids
-  m_TagString: Untagged
+  m_TagString: Astroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ae1f92f65cf854594e71fc8a680848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Joint: {fileID: 0}
+  _Connected: 0
 --- !u!212 &212172173112575494
 SpriteRenderer:
   m_ObjectHideFlags: 1
