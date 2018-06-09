@@ -14,10 +14,23 @@ public class Bullet : MonoBehaviour {
 	
     void OnTriggerEnter2D(Collider2D collider)
     {
-        switch (collider.gameObject.name)
+        switch (collider.gameObject.tag)
         {
-            case "Player":
+            case "Player1":
                 Debug.Log("I'm hitting a Player!!");
+                Destroy(collider.gameObject);
+                break;
+            case "Player2":
+                Debug.Log("I'm hitting a Player!!");
+                Destroy(collider.gameObject);
+                break;
+            case "Player3":
+                Debug.Log("I'm hitting a Player!!");
+                Destroy(collider.gameObject);
+                break;
+            case "Player4":
+                Debug.Log("I'm hitting a Player!!");
+                Destroy(collider.gameObject);
                 break;
             case "Asteroid":
                 Debug.Log("I'm hitting an Asteroid!!");
