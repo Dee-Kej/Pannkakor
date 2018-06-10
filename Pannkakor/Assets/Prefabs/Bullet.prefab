@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1417007214496400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -191,6 +191,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c8febdb796cb63542b40b7f2ea61e0ed, type: 3}
   - {fileID: 8300000, guid: 4e9f5ef3b92f06b4983d8e78a72dd8da, type: 3}
   - {fileID: 8300000, guid: bb44d3ab696437943ae23d8806fc28bf, type: 3}
+  bulletSprites:
+  - {fileID: 21300000, guid: 15b454cd3b0140b4488ffae92e34f800, type: 3}
+  - {fileID: 21300000, guid: 9ace8836f83e6a54888004833a5eabda, type: 3}
 --- !u!212 &212812824980906748
 SpriteRenderer:
   m_ObjectHideFlags: 1
