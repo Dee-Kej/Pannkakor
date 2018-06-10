@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Shipmovement : MonoBehaviour
 {
-
+    public static Shipmovement Instance;
     float accelerationForce = 20f;
     float rotationForce = 100f;
     public GameObject bullet;
@@ -26,10 +26,16 @@ public class Shipmovement : MonoBehaviour
     string grabButton;
     public bool GrabControllerBool;
     LineRenderer LineRay;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         LineRay = GetComponent<LineRenderer>();
         LineRay.enabled = false;
+        LineRay.positionCount = 2;
         GrabControllerBool = false;
         switch (gameObject.tag)
         {
@@ -149,9 +155,9 @@ public class Shipmovement : MonoBehaviour
                 LineRay.enabled = true;
                 LineRay.SetPosition(0, Temp[i].transform.position);
                 LineRay.SetPosition(1, transform.position);
-                
+               
          }
-            else
+            else if(!GrabControllerBool && Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected == false)
             {
                 LineRay.enabled = false;
             }
