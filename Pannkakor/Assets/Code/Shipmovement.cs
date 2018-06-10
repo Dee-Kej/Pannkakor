@@ -15,7 +15,7 @@ public class Shipmovement : MonoBehaviour
     public ParticleSystem exhaust;
     public ParticleSystem leftThruster;
     public ParticleSystem rightThruster;
-    public ParticleSystem Laser;
+    
     [Space]
     public Vector2 BoxSize,_ParticlePos;
     public float angle,_particleStep,RayRange, Distance,DotValue;
