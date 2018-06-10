@@ -77,7 +77,7 @@ public class Shipmovement : MonoBehaviour
         {
             Destroy(gameObject);
         }
-           
+
 
         transform.Rotate(0, 0, -Input.GetAxis(axisNameH) * rotationForce * Time.deltaTime);
 
@@ -131,34 +131,34 @@ public class Shipmovement : MonoBehaviour
         RaycastHit2D[] Temp = Physics2D.BoxCastAll(transform.position, BoxSize, angle, Quaternion.identity.eulerAngles, Distance);
 
 
-
-        for (int i = 0; i < Temp.Length; i++)
+        if (Input.GetButtonDown(grabButton))
         {
-            float dot = Vector2.Dot(transform.up, (Temp[i].transform.position - transform.position).normalized);
-
-           
-            if (Temp[i].transform.CompareTag("Astroid") && dot > DotValue && Input.GetButtonDown(grabButton) && !GrabControllerBool)
+            for (int i = 0; i < Temp.Length; i++)
             {
-                GrabControllerBool = true;
-                Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = true;
-                Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
+                float dot = Vector2.Dot(transform.up, (Temp[i].transform.position - transform.position).normalized);
 
-            }
-            else if (Input.GetButtonDown(grabButton) && GrabControllerBool)
-            {
-                Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = false;
-            }
 
-            Debug.Log("u hit the astroid");
+                if (Temp[i].transform.CompareTag("Astroid") && dot > DotValue && !GrabControllerBool)
+                {
+                    GrabControllerBool = true;
+                    Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = true;
+                    Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
 
-            if (Temp[i] && dot > DotValue)
-            {
-              
-                Debug.DrawLine(transform.position, Temp[i].transform.position, Color.green);
+                }
+                else if (GrabControllerBool)
+                {
+                    Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = false;
+                }
+
+                Debug.Log("u hit the astroid");
+
+                if (Temp[i] && dot > DotValue)
+                {
+
+                    Debug.DrawLine(transform.position, Temp[i].transform.position, Color.green);
+                }
             }
-       
         }
-        
     }
 
     void ShootBullet()
