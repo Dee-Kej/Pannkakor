@@ -212,7 +212,7 @@ public class Shipmovement : MonoBehaviour
             ShootBullet();
         }
 
-
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, 0, 20), Mathf.Clamp(rb.velocity.y, 0, 20));
 
         if (Tookdmg)
         {
