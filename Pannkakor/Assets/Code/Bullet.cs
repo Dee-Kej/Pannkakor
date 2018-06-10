@@ -7,8 +7,9 @@ public class Bullet : MonoBehaviour {
 
     public AudioClip[] audioclips;
     public Sprite[] bulletSprites;
-
+    GameObject Spawn;
 	void Start () {
+        Spawn = GameObject.Find("Spawner");
         GetComponent<Rigidbody2D>().AddForce(transform.up * 1000);
         //Debug.Log("Waking up");
         GetComponent<AudioSource>().clip = audioclips[Random.Range(0, audioclips.Length-1)];
@@ -28,19 +29,31 @@ public class Bullet : MonoBehaviour {
         {
             case "Player1":
                 //Debug.Log("I'm hitting a Player!!");
-                Destroy(collider.gameObject);
+                Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().stage--;
+                Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().Tookdmg = true;
+                Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().Death.Play();
+
                 break;
             case "Player2":
                 //Debug.Log("I'm hitting a Player!!");
-                Destroy(collider.gameObject);
+                Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().stage--;
+                Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Tookdmg = true;
+                Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Death.Play();
+
                 break;
             case "Player3":
                 //Debug.Log("I'm hitting a Player!!");
-                Destroy(collider.gameObject);
+                Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().stage--;
+                Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().Tookdmg = true;
+                Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().Death.Play();
+
                 break;
             case "Player4":
                 //Debug.Log("I'm hitting a Player!!");
-                Destroy(collider.gameObject);
+                Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().stage--;
+                Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().Tookdmg = true;
+                Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().Death.Play();
+
                 break;
             case "Astroid":
                 //Debug.Log("I'm hitting an Asteroid!!");

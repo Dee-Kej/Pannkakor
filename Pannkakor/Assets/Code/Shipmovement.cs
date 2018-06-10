@@ -7,8 +7,11 @@ using UnityEngine;
 public class Shipmovement : MonoBehaviour
 {
     public int life = 3;
+    public int stage = 3;
+    public Sprite dmgship1, dmgship2, brokenship;
+
     public static Shipmovement Instance;
-    float accelerationForce = 20f;
+    float accelerationForce = 5f;
     float rotationForce = 100f;
     public GameObject bullet;
     public GameObject projectileSpawn;
@@ -18,6 +21,8 @@ public class Shipmovement : MonoBehaviour
     public ParticleSystem leftThruster;
     public ParticleSystem rightThruster;
     public ParticleSystem Death;
+
+    private bool slowdown = false;
     
     [Space]
     public Vector2 BoxSize,_ParticlePos;
@@ -31,13 +36,18 @@ public class Shipmovement : MonoBehaviour
     Renderer Rend;
     Collider2D col;
     public GameObject Spawn;
-    
+    SpriteRenderer spriterend;
+
+    float startTime = 0, elapsedTime = 0, okToShootAgainTime = 2;
+
     private void Awake()
     {
         Instance = this;
     }
     void Start()
     {
+        spriterend = GetComponent<SpriteRenderer>();
+        Spawn = GameObject.Find("Spawner");
         col = GetComponent<Collider2D>();
         Rend = GetComponent<Renderer>();
         Death.Stop();
@@ -78,11 +88,31 @@ public class Shipmovement : MonoBehaviour
 
     void Update()
     {
-        print(life);
+        
 
-        if (life <= 0)
+
+        elapsedTime = Time.deltaTime - startTime;
+        if (elapsedTime > okToShootAgainTime)
         {
-            Destroy(gameObject);
+            startTime = Time.deltaTime;
+            //shoot
+        }
+
+        switch (stage)
+        {
+            case 2:
+                spriterend.sprite = dmgship1;
+                break;
+
+            case 1:
+                spriterend.sprite = dmgship2;
+
+                break;
+
+
+            case 0:
+                spriterend.sprite = brokenship;
+                break;
         }
 
 
@@ -121,13 +151,13 @@ public class Shipmovement : MonoBehaviour
         {
             rightThruster.gameObject.SetActive(true);
         }
-        else if (Input.GetAxis(axisNameH) == 0 && Input.GetAxis(axisNameV) >= 0)
+        else if (Input.GetAxis(axisNameH) == 0 && Input.GetAxis(axisNameV) == 0)
         {
             leftThruster.gameObject.SetActive(false);
             rightThruster.gameObject.SetActive(false);
         }
 
-        if (Input.GetAxis(axisNameV) == 0 && rb.angularVelocity != 0)
+        if (Input.GetAxis(axisNameV) < 0.1 && Input.GetAxis(axisNameV) > -0.1)
         {
             StabilizeShip();
         }
@@ -136,18 +166,88 @@ public class Shipmovement : MonoBehaviour
             ShootBullet();
         if (Tookdmg)
         {
-            
-            Rend.enabled = false;
-            col.enabled = false;
-            if (!Death.isPlaying)
+            print(life + " Life");
+            print(stage + " Stage");
+            stage--;
+            Tookdmg = false;
+            if (stage <= 0)
             {
-                transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[0].transform.position;
-                Rend.enabled = true;
-                col.enabled = true;
-                Tookdmg = false;
+                life--;
+                stage = 3;
+                // Rend.enabled = false;
+                col.enabled = false;
+
+                switch (gameObject.tag)
+                {
+                    case "Player1":
+                        Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().Death.Play();
+
+                        break;
+                    case "Player2":
+                        Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Death.Play();
+                        break;
+                    case "Player3":
+                        Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().Death.Play();
+                        break;
+                    case "Player4":
+                        Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().Death.Play();
+                        break;
+                    default:
+                        Debug.Log("Is borken");
+                        break;
+                }
+
+                if (!Death.isPlaying)
+                {
+                    switch (gameObject.tag)
+                    {
+                        case "Player1":
+                            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[0].transform.position;
+                            Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().rb.Sleep();
+                            break;
+                        case "Player2":
+                            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[1].transform.position;
+                            Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().rb.Sleep();
+                            break;
+                        case "Player3":
+                            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[2].transform.position;
+                            Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().rb.Sleep();
+                            break;
+                        case "Player4":
+                            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[3].transform.position;
+                            Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().rb.Sleep();
+                            break;
+                        default:
+                            Debug.Log("Is borken");
+                            break;
+
+                    }
+                    col.enabled = true;
+
+                    // Rend.enabled = true;
+
+
+                }
+
             }
+
+
+
         }
-      
+        print(life);
+        print(stage);
+        Tookdmg = false;
+        if (life <= 0)
+        {
+            Destroy(gameObject);
+        }
+
+        if (slowdown)
+        {
+            rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, 5 * Time.deltaTime);
+            rb.angularVelocity = Mathf.Lerp(rb.angularVelocity, 0, 5 * Time.deltaTime);
+        }
+              
         RaycastHit2D[] Temp = Physics2D.BoxCastAll(transform.position, BoxSize, angle, Quaternion.identity.eulerAngles, Distance);
 
 
@@ -165,10 +265,11 @@ public class Shipmovement : MonoBehaviour
                     Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
                     GrabControllerBool = true;
                 }
-                if (GrabControllerBool)
+               else if (GrabControllerBool)
                 {
                     print(GrabControllerBool);
                     Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = false;
+                    GrabControllerBool = false;
                     
                 }
               
@@ -199,14 +300,20 @@ public class Shipmovement : MonoBehaviour
     void StabilizeShip()
     {
         StartCoroutine(WaitStablelize());
-        rb.velocity = new Vector3(0, 0, 0);
-        rb.angularVelocity = 0;
-
     }
-
 
     IEnumerator WaitStablelize()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
+
+        if (Input.GetAxis(axisNameV) < 0.1 && Input.GetAxis(axisNameV) > -0.1)
+        {
+            slowdown = true;
+        }
+        else
+        {
+            slowdown = false;
+        }
+
     }
 }

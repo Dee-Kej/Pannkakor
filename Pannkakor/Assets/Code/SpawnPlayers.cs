@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnPlayers : MonoBehaviour {
 
-    
+   
 
     public GameObject playerPrefab;
     GameObject playerData;
@@ -14,6 +14,7 @@ public class SpawnPlayers : MonoBehaviour {
   public  GameObject player1, player2, player3, player4;
 
    
+
     // Use this for initialization
     void Start () {
         if(GameObject.Find("Persistent PlayerData") == true)

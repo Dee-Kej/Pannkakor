@@ -10,7 +10,7 @@ public class AstroidScript : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     float Rotationvalue;
-   
+    GameObject Spawn;
     
 
     public  bool _Connected;
@@ -22,7 +22,7 @@ public class AstroidScript : MonoBehaviour
 
     void Start()
     {
-       
+        Spawn = GameObject.Find("Spawner");
         Rotationvalue = Random.Range(-5f, 5f);
         animator = GetComponent<Animator>();
         _Connected = false;
@@ -69,21 +69,31 @@ public class AstroidScript : MonoBehaviour
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player1":
-                Shipmovement.Instance.life--;
-                Shipmovement.Instance.Tookdmg = true;
-                Shipmovement.Instance.Death.Play();
+
+                Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().Tookdmg = true;
+                
+             
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player2":
-                Shipmovement.Instance.life--;
+        
+                Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Tookdmg = true;
+                
+          
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player3":
-                Shipmovement.Instance.life--;
+                
+                Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().Tookdmg = true;
+                
+          
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player4":
-                Shipmovement.Instance.life--;
+              
+                Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().Tookdmg = true;
+                
+             
                 GetComponent<AudioSource>().Play();
 
                 break;
