@@ -7,9 +7,7 @@ public class StartGame : MonoBehaviour {
 
     public PlayerCount playerScript;
 	// Use this for initialization
-	void Start () {
-        StartCoroutine(ResetPlayers());
-	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -20,12 +18,5 @@ public class StartGame : MonoBehaviour {
         }
 	}
 
-    IEnumerator ResetPlayers()
-    {
-        yield return new WaitForSeconds(2f);
-        playerScript.player1 = false;
-        playerScript.player2 = false;
-        playerScript.player3 = false;
-        playerScript.player4 = false;
-    }
+    
 }
