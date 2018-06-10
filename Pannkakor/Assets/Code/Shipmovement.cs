@@ -24,9 +24,11 @@ public class Shipmovement : MonoBehaviour
     string fireButton;
     string grabButton;
     public bool GrabControllerBool;
-    
+    LineRenderer LineRend;
     void Start()
     {
+        LineRend.GetComponent<LineRenderer>();
+        LineRend.enabled = false;
         GrabControllerBool = false;
         switch (gameObject.tag)
         {
@@ -139,8 +141,19 @@ public class Shipmovement : MonoBehaviour
 
             if (Temp[i] && dot > DotValue)
             {
+                LineRend.enabled = true;
+                LineRend.SetPosition(0, transform.position);
+                LineRend.SetPosition(1, Temp[i].transform.position);
                 Debug.DrawLine(transform.position, Temp[i].transform.position, Color.green);
             }
+            else
+            {
+                LineRend.enabled = false;
+            }
+           
+           
+
+
         }
     }
 
