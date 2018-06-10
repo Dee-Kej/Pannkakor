@@ -20,26 +20,38 @@ public class PlayerCount : MonoBehaviour {
         {
             player1 = true;
             Debug.Log("player 1 ready");
-            pressS.SetActive(false);
+            if (pressS != null)
+            {
+                pressS.SetActive(false);
+            }
         }
 
         else if (Input.GetKeyDown(KeyCode.K) || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Grab2") && !player2)
         {
             player2 = true;
             Debug.Log("player 2 ready");
-            pressK.SetActive(false);
+            if (pressK != null)
+            {
+                pressK.SetActive(false);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetButtonDown("Fire3") || Input.GetButtonDown("Grab3") && !player3)
         {
             player3 = true;
             Debug.Log("player 3 ready");
-            pressDown.SetActive(false);
+            if (pressDown != null)
+            {
+                pressDown.SetActive(false);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Keypad5) || Input.GetButtonDown("Fire4") || Input.GetButtonDown("Grab4") && !player4)
         {
             player4 = true;
             Debug.Log("player 4 ready");
-            press5.SetActive(false);
+            if (press5 != null)
+            {
+                press5.SetActive(false);
+            }
         }
     }
 }
