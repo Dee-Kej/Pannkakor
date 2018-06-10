@@ -54,6 +54,11 @@ public class AstroidScript : MonoBehaviour
                 Rotationvalue = Random.Range(-5f, 5f);
             }
         }
+
+        if(transform.localScale.x > 2)
+        {
+            transform.localScale = new Vector3(2, 2, 2);
+        }
         
         
 
