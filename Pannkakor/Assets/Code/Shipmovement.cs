@@ -13,6 +13,7 @@ public class Shipmovement : MonoBehaviour
     public GameObject projectileSpawn;
     public Rigidbody2D rb;
     public ParticleSystem exhaust;
+    public ParticleSystem exhaust2;
     public ParticleSystem leftThruster;
     public ParticleSystem rightThruster;
     
@@ -76,10 +77,12 @@ public class Shipmovement : MonoBehaviour
         {
             GetComponent<AudioSource>().Stop();
             exhaust.gameObject.SetActive(false);
+            exhaust2.gameObject.SetActive(false);
         }
         else if (Input.GetAxis(axisNameV) > 0)
         {
             exhaust.gameObject.SetActive(true);
+            exhaust2.gameObject.SetActive(true);
             if (!GetComponent<AudioSource>().isPlaying)
             {
                 GetComponent<AudioSource>().Play();

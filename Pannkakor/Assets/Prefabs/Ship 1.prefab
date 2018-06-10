@@ -356,6 +356,7 @@ MonoBehaviour:
   projectileSpawn: {fileID: 1089933511172518}
   rb: {fileID: 0}
   exhaust: {fileID: 198575303579740296}
+  exhaust2: {fileID: 198631165830741568}
   leftThruster: {fileID: 198616881770265058}
   rightThruster: {fileID: 198529043373330416}
   BoxSize: {x: 2, y: 7}
