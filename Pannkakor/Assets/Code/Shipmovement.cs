@@ -188,10 +188,11 @@ public class Shipmovement : MonoBehaviour
                     Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
                     GrabControllerBool = true;
                 }
-                if (GrabControllerBool)
+               else if (GrabControllerBool)
                 {
                     print(GrabControllerBool);
                     Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = false;
+                    GrabControllerBool = false;
                     
                 }
               
