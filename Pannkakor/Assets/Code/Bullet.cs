@@ -42,7 +42,7 @@ public class Bullet : MonoBehaviour {
                 //Debug.Log("I'm hitting a Player!!");
                 Destroy(collider.gameObject);
                 break;
-            case "Asteroid":
+            case "Astroid":
                 //Debug.Log("I'm hitting an Asteroid!!");
                 Destroy(this.gameObject);
                 break;
