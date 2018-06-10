@@ -385,11 +385,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1417007214496400, guid: 722cda57462ed7f4bb450883f3c8f689, type: 2}
   projectileSpawn: {fileID: 1076978220303586}
-  rb: {fileID: 0}
+  rb: {fileID: 50278038495732810}
   exhaust: {fileID: 198172491559349952}
+  exhaust2: {fileID: 198097475678000636}
   leftThruster: {fileID: 198979968111422762}
   rightThruster: {fileID: 198836969880357846}
-  Laser: {fileID: 0}
   BoxSize: {x: 2, y: 7}
   _ParticlePos: {x: 0, y: 0}
   angle: 0
@@ -477,7 +477,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.25
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5008,7 +5008,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.25
       minScalar: 5
       maxCurve:
         serializedVersion: 2
