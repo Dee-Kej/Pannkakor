@@ -7,6 +7,7 @@ public class SpawnPlayers : MonoBehaviour {
     GameObject playerData;
     public GameObject[] spawnpoints;
     public Sprite[] playerSprites;
+    public Vector3 playerScale;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,8 @@ public class SpawnPlayers : MonoBehaviour {
         {
             return;
         }
+
+        playerPrefab.transform.localScale = playerScale;
 
         if (playerData != null)
         {

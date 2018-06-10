@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour {
 
+    public PlayerCount playerScript;
 	// Use this for initialization
 	void Start () {
 		
@@ -12,7 +13,7 @@ public class StartGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (playerScript.player1 || playerScript.player2 || playerScript.player3 || playerScript.player4 && Input.GetButtonDown("Start"))
         {
             SceneManager.LoadScene(1);
         }

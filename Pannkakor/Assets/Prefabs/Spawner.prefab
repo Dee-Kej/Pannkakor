@@ -179,3 +179,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 314782dc8c9057741a312c6ab5835148, type: 3}
   - {fileID: 21300000, guid: 9e02beb846f16414e9805e0ba0c59c52, type: 3}
   - {fileID: 21300000, guid: bb7f01d68400f3c42bcb392dd5359d84, type: 3}
+  playerScale: {x: 0.03, y: 0.03, z: 0.03}

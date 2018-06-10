@@ -157,7 +157,7 @@ Transform:
   m_GameObject: {fileID: 1413556908631802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.6447873, y: -1.0985844, z: 0}
-  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 4126608981198220}
   - {fileID: 4365201751021924}
@@ -327,9 +327,14 @@ MonoBehaviour:
   exhaust: {fileID: 198575303579740296}
   leftThruster: {fileID: 198616881770265058}
   rightThruster: {fileID: 198529043373330416}
+  Laser: {fileID: 0}
   BoxSize: {x: 2, y: 7}
+  _ParticlePos: {x: 0, y: 0}
   angle: 0
+  _particleStep: 0
+  RayRange: 0
   Distance: 5
+  DotValue: 0
 --- !u!198 &198529043373330416
 ParticleSystem:
   m_ObjectHideFlags: 1
