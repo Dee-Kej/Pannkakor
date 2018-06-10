@@ -38,6 +38,7 @@ public class Shipmovement : MonoBehaviour
     }
     void Start()
     {
+        Spawn = GameObject.Find("Spawner");
         col = GetComponent<Collider2D>();
         Rend = GetComponent<Renderer>();
         Death.Stop();
@@ -141,7 +142,29 @@ public class Shipmovement : MonoBehaviour
             col.enabled = false;
             if (!Death.isPlaying)
             {
-                transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[0].transform.position;
+                switch (gameObject.tag)
+                {
+                    case "Player1":
+                        transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[0].transform.position;
+                        Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().rb.Sleep();
+                        break;
+                    case "Player2":
+                        transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[1].transform.position;
+                        Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().rb.Sleep();
+                        break;
+                    case "Player3":
+                        transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[2].transform.position;
+                        Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().rb.Sleep();
+                        break;
+                    case "Player4":
+                        transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[3].transform.position;
+                        Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().rb.Sleep();
+                        break;
+                    default:
+                        Debug.Log("Is borken");
+                        break;
+                }
+               
                 Rend.enabled = true;
                 col.enabled = true;
                 Tookdmg = false;
