@@ -70,30 +70,29 @@ public class AstroidScript : MonoBehaviour
                 break;
             case "Player1":
 
-                Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().life--;
                 Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().Tookdmg = true;
-                Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().Death.Play();
+                
              
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player2":
-                Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().life--;
+        
                 Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Tookdmg = true;
-                Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Death.Play();
+                
           
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player3":
-                Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().life--;
+                
                 Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().Tookdmg = true;
-                Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().Death.Play();
+                
           
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player4":
-                Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().life--;
+              
                 Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().Tookdmg = true;
-                Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().Death.Play();
+                
              
                 GetComponent<AudioSource>().Play();
 
