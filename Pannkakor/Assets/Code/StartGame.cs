@@ -13,7 +13,7 @@ public class StartGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (playerScript.player1 || playerScript.player2 || playerScript.player3 || playerScript.player4 && Input.GetButtonDown("Start"))
+        if ((playerScript.player1 || playerScript.player2 || playerScript.player3 || playerScript.player4) && Input.GetButtonDown("Start"))
         {
             SceneManager.LoadScene(1);
         }
