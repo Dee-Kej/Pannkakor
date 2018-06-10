@@ -10,6 +10,8 @@ public class AstroidScript : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     float Rotationvalue;
+   
+    
 
     public  bool _Connected;
 
@@ -20,6 +22,7 @@ public class AstroidScript : MonoBehaviour
 
     void Start()
     {
+       
         Rotationvalue = Random.Range(-5f, 5f);
         animator = GetComponent<Animator>();
         _Connected = false;
@@ -31,14 +34,15 @@ public class AstroidScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _Connected = false;
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    _Connected = false;
+        //}
         if (_Connected)
         {
             _Joint.enabled = true;
             rb.drag = 2.5f;
+            
         }
         else if (!_Connected)
         {

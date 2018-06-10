@@ -25,10 +25,11 @@ public class Shipmovement : MonoBehaviour
     string fireButton;
     string grabButton;
     public bool GrabControllerBool;
- 
+    LineRenderer LineRay;
     void Start()
     {
-       
+        LineRay = GetComponent<LineRenderer>();
+        LineRay.enabled = false;
         GrabControllerBool = false;
         switch (gameObject.tag)
         {
@@ -143,8 +144,20 @@ public class Shipmovement : MonoBehaviour
               
                 Debug.DrawLine(transform.position, Temp[i].transform.position, Color.green);
             }
-           
+            if (GrabControllerBool && Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected == true)
+            {
+                LineRay.enabled = true;
+                LineRay.SetPosition(0, Temp[i].transform.position);
+                LineRay.SetPosition(1, transform.position);
+                
+         }
+            else
+            {
+                LineRay.enabled = false;
+            }
+
         }
+        
     }
 
     void ShootBullet()
