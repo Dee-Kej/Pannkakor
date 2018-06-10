@@ -16,26 +16,26 @@ public class PlayerCount : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.S) && !player1)
+		if(Input.GetKeyDown(KeyCode.S) || Input.GetButtonDown("Fire1") || Input.GetButtonDown("Grab1") && !player1)
         {
             player1 = true;
             Debug.Log("player 1 ready");
             pressS.SetActive(false);
         }
 
-        else if (Input.GetKeyDown(KeyCode.K) && !player2)
+        else if (Input.GetKeyDown(KeyCode.K) || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Grab2") && !player2)
         {
             player2 = true;
             Debug.Log("player 2 ready");
             pressK.SetActive(false);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && !player3)
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetButtonDown("Fire3") || Input.GetButtonDown("Grab3") && !player3)
         {
             player3 = true;
             Debug.Log("player 3 ready");
             pressDown.SetActive(false);
         }
-        else if (Input.GetKeyDown(KeyCode.Keypad5) && !player4)
+        else if (Input.GetKeyDown(KeyCode.Keypad5) || Input.GetButtonDown("Fire4") || Input.GetButtonDown("Grab4") && !player4)
         {
             player4 = true;
             Debug.Log("player 4 ready");

@@ -21,6 +21,8 @@ public class Shipmovement : MonoBehaviour
     public float angle,_particleStep,RayRange, Distance,DotValue;
     string axisNameH;
     string axisNameV;
+    string fireButton;
+    string grabButton;
     
     void Start()
     {
@@ -29,18 +31,26 @@ public class Shipmovement : MonoBehaviour
             case "Player1":
                 axisNameH = "Horizontal";
                 axisNameV = "Vertical";
+                fireButton = "Fire1";
+                grabButton = "Grab1";
                 break;
             case "Player2":
                 axisNameH = "Horizontal2";
                 axisNameV = "Vertical2";
+                fireButton = "Fire2";
+                grabButton = "Grab2";
                 break;
             case "Player3":
                 axisNameH = "Horizontal3";
                 axisNameV = "Vertical3";
+                fireButton = "Fire3";
+                grabButton = "Grab3";
                 break;
             case "Player4":
                 axisNameH = "Horizontal4";
                 axisNameV = "Vertical4";
+                fireButton = "Fire4";
+                grabButton = "Grab4";
                 break;
             default:
                 break;
@@ -98,7 +108,7 @@ public class Shipmovement : MonoBehaviour
             StabilizeShip();
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown(fireButton))
             ShootBullet();
 
         RaycastHit2D[] Temp = Physics2D.BoxCastAll(transform.position, BoxSize, angle, Quaternion.identity.eulerAngles, Distance);
