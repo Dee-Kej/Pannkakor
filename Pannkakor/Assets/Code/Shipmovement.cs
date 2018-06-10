@@ -23,9 +23,11 @@ public class Shipmovement : MonoBehaviour
     string axisNameV;
     string fireButton;
     string grabButton;
+    public bool GrabControllerBool;
     
     void Start()
     {
+        GrabControllerBool = false;
         switch (gameObject.tag)
         {
             case "Player1":
@@ -121,14 +123,19 @@ public class Shipmovement : MonoBehaviour
             print(dot);
 
             // && 
-            if (Temp[i].transform.CompareTag("Astroid") && dot > DotValue && Input.GetKeyDown(KeyCode.X))
+            if (Temp[i].transform.CompareTag("Astroid") && dot > DotValue && Input.GetKeyDown(KeyCode.X) && !GrabControllerBool)
             {
+                GrabControllerBool = true;
                 Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = true;
                 Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
                
             }
+            else if (Input.GetKeyDown(KeyCode.X) && GrabControllerBool)
+            {
+                Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = false;
+            }
   
-            Debug.Log("u hit the astjrnieno at -0.3)");
+            Debug.Log("u hit the astroid");
 
             if (Temp[i] && dot > DotValue)
             {
