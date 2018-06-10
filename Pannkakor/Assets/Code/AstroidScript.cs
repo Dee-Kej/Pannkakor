@@ -70,16 +70,11 @@ public class AstroidScript : MonoBehaviour
                 break;
             case "Player1":
 
-                Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().Tookdmg = true;
-                
-             
+                Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().Tookdmg = true;                         
                 GetComponent<AudioSource>().Play();
                 break;
-            case "Player2":
-        
-                Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Tookdmg = true;
-                
-          
+            case "Player2":     
+                Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Tookdmg = true;          
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player3":

@@ -11,7 +11,7 @@ public class SpawnPlayers : MonoBehaviour {
     public GameObject[] spawnpoints;
     public Sprite[] playerSprites;
     public Vector3 playerScale;
-  public  GameObject player1, player2, player3, player4;
+    public GameObject player1, player2, player3, player4;
 
    
 

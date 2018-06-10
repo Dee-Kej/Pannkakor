@@ -386,9 +386,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 3
   stage: 3
-  dmgship1: {fileID: 21300000, guid: 85f54d580e15d3149a98916a219f4b05, type: 3}
-  dmgship2: {fileID: 21300000, guid: 4409cfcfa8444444b9afb0eaf63a52bb, type: 3}
-  brokenship: {fileID: 21300000, guid: 6c407098e1380c54b8fa612b4b7be2dd, type: 3}
+  dmgship1:
+  - {fileID: 21300000, guid: 85f54d580e15d3149a98916a219f4b05, type: 3}
+  - {fileID: 21300000, guid: 3a9f131bd2f7fc14ea67b1e79902062b, type: 3}
+  - {fileID: 21300000, guid: 712977f1785fb5942bfccf40d06123c0, type: 3}
+  - {fileID: 21300000, guid: 0a45bde6082de4340b5ca56259b384e3, type: 3}
+  dmgship2:
+  - {fileID: 21300000, guid: 4409cfcfa8444444b9afb0eaf63a52bb, type: 3}
+  - {fileID: 21300000, guid: 23d77ee32e64c4c49ac153beb680b66b, type: 3}
+  - {fileID: 21300000, guid: e307ff5fb2ddb834db604d731799e7fc, type: 3}
+  - {fileID: 21300000, guid: 723247ec4f0ac4e4aa2254e3806113bd, type: 3}
+  brokenship:
+  - {fileID: 21300000, guid: 6c407098e1380c54b8fa612b4b7be2dd, type: 3}
+  - {fileID: 21300000, guid: 6e1e979de863d824caae17a7a074624a, type: 3}
+  - {fileID: 21300000, guid: 51445e3b5ac57a9468aff835c5250fbc, type: 3}
+  - {fileID: 21300000, guid: 26118464015b8674795f1f78e302998d, type: 3}
   bullet: {fileID: 1417007214496400, guid: 722cda57462ed7f4bb450883f3c8f689, type: 2}
   projectileSpawn: {fileID: 1089933511172518}
   rb: {fileID: 0}

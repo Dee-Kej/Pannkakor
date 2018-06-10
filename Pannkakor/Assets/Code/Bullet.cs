@@ -29,30 +29,29 @@ public class Bullet : MonoBehaviour {
         {
             case "Player1":
                 //Debug.Log("I'm hitting a Player!!");
-                Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().stage--;
+              
                 Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().Tookdmg = true;
-                Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().Death.Play();
+                
 
                 break;
             case "Player2":
                 //Debug.Log("I'm hitting a Player!!");
-                Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().stage--;
+                
                 Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Tookdmg = true;
-                Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Death.Play();
+               
 
                 break;
             case "Player3":
                 //Debug.Log("I'm hitting a Player!!");
-                Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().stage--;
+              
                 Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().Tookdmg = true;
-                Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().Death.Play();
-
+               
                 break;
             case "Player4":
                 //Debug.Log("I'm hitting a Player!!");
-                Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().stage--;
+       
                 Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().Tookdmg = true;
-                Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().Death.Play();
+              
 
                 break;
             case "Astroid":

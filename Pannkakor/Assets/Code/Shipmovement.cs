@@ -8,7 +8,7 @@ public class Shipmovement : MonoBehaviour
 {
     public int life = 3;
     public int stage = 3;
-    public Sprite dmgship1, dmgship2, brokenship;
+    public Sprite[] dmgship1, dmgship2, brokenship;
 
     public static Shipmovement Instance;
     float accelerationForce = 5f;
@@ -34,11 +34,12 @@ public class Shipmovement : MonoBehaviour
     public bool GrabControllerBool;
     public bool Tookdmg;
     Renderer Rend;
-    Collider2D col;
+    PolygonCollider2D col;
     public GameObject Spawn;
     SpriteRenderer spriterend;
+    bool dead = false;
 
-    float startTime = 0, elapsedTime = 0, okToShootAgainTime = 2;
+    float startTime = 0, elapsedTime = 0, okToShootAgainTime = 0.25f;
 
     private void Awake()
     {
@@ -48,7 +49,7 @@ public class Shipmovement : MonoBehaviour
     {
         spriterend = GetComponent<SpriteRenderer>();
         Spawn = GameObject.Find("Spawner");
-        col = GetComponent<Collider2D>();
+        col = GetComponent<PolygonCollider2D>();
         Rend = GetComponent<Renderer>();
         Death.Stop();
         GrabControllerBool = false;
@@ -91,27 +92,68 @@ public class Shipmovement : MonoBehaviour
         
 
 
-        elapsedTime = Time.deltaTime - startTime;
-        if (elapsedTime > okToShootAgainTime)
-        {
-            startTime = Time.deltaTime;
-            //shoot
-        }
+        elapsedTime = Time.time - startTime;
+
 
         switch (stage)
         {
             case 2:
-                spriterend.sprite = dmgship1;
+                if(gameObject.tag == "Player1")
+                {
+                    spriterend.sprite = dmgship1[0];
+                }
+                else if (gameObject.tag == "Player2")
+                {
+                    spriterend.sprite = dmgship1[1];
+                }
+                else if (gameObject.tag == "Player3")
+                {
+                    spriterend.sprite = dmgship1[2];
+                }
+                else if (gameObject.tag == "Player4")
+                {
+                    spriterend.sprite = dmgship1[3];
+                }
+
                 break;
 
             case 1:
-                spriterend.sprite = dmgship2;
-
+                if (gameObject.tag == "Player1")
+                {
+                    spriterend.sprite = dmgship2[0];
+                }
+                else if (gameObject.tag == "Player2")
+                {
+                    spriterend.sprite = dmgship2[1];
+                }
+                else if (gameObject.tag == "Player3")
+                {
+                    spriterend.sprite = dmgship2[2];
+                }
+                else if (gameObject.tag == "Player4")
+                {
+                    spriterend.sprite = dmgship2[3];
+                }
                 break;
 
 
             case 0:
-                spriterend.sprite = brokenship;
+                if (gameObject.tag == "Player1")
+                {
+                    spriterend.sprite = brokenship[0];
+                }
+                else if (gameObject.tag == "Player2")
+                {
+                    spriterend.sprite = brokenship[1];
+                }
+                else if (gameObject.tag == "Player3")
+                {
+                    spriterend.sprite = brokenship[2];
+                }
+                else if (gameObject.tag == "Player4")
+                {
+                    spriterend.sprite = brokenship[3];
+                }
                 break;
         }
 
@@ -162,8 +204,16 @@ public class Shipmovement : MonoBehaviour
             StabilizeShip();
         }
 
-        if (Input.GetButtonDown(fireButton))
+        if (Input.GetButtonDown(fireButton) && elapsedTime > okToShootAgainTime)
+        {
+            Debug.Log("lol");
+            startTime = Time.time;
+            //shoot
             ShootBullet();
+        }
+
+
+
         if (Tookdmg)
         {
             print(life + " Life");
@@ -176,63 +226,66 @@ public class Shipmovement : MonoBehaviour
                 stage = 3;
                 // Rend.enabled = false;
                 col.enabled = false;
+                /*Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().*/
+                Death.Play();
+                dead = true;
 
-                switch (gameObject.tag)
-                {
-                    case "Player1":
-                        Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().Death.Play();
+                //switch (gameObject.tag)
+                //{
+                //    case "Player1":
 
-                        break;
-                    case "Player2":
-                        Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Death.Play();
-                        break;
-                    case "Player3":
-                        Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().Death.Play();
-                        break;
-                    case "Player4":
-                        Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().Death.Play();
-                        break;
-                    default:
-                        Debug.Log("Is borken");
-                        break;
-                }
-
-                if (!Death.isPlaying)
-                {
-                    switch (gameObject.tag)
-                    {
-                        case "Player1":
-                            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[0].transform.position;
-                            Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().rb.Sleep();
-                            break;
-                        case "Player2":
-                            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[1].transform.position;
-                            Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().rb.Sleep();
-                            break;
-                        case "Player3":
-                            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[2].transform.position;
-                            Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().rb.Sleep();
-                            break;
-                        case "Player4":
-                            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[3].transform.position;
-                            Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().rb.Sleep();
-                            break;
-                        default:
-                            Debug.Log("Is borken");
-                            break;
-
-                    }
-                    col.enabled = true;
-
-                    // Rend.enabled = true;
+                //        break;
+                //    case "Player2":
+                //        Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().Death.Play();
+                //        break;
+                //    case "Player3":
+                //        Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().Death.Play();
+                //        break;
+                //    case "Player4":
+                //        Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().Death.Play();
+                //        break;
+                //    default:
+                //        Debug.Log("Is borken");
+                //        break;
+                //}
 
 
-                }
+
+                //switch (gameObject.tag)
+                //{
+                //    case "Player1":
+                //        transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[0].transform.position;
+                //        Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().rb.Sleep();
+                //        col.enabled = true;
+                //        break;
+                //    case "Player2":
+                //        transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[1].transform.position;
+                //        Spawn.GetComponent<SpawnPlayers>().player2.GetComponent<Shipmovement>().rb.Sleep();
+                //        col.enabled = true;
+                //        break;
+                //    case "Player3":
+                //        transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[2].transform.position;
+                //        Spawn.GetComponent<SpawnPlayers>().player3.GetComponent<Shipmovement>().rb.Sleep();
+                //        col.enabled = true;
+                //        break;
+                //    case "Player4":
+                //        transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[3].transform.position;
+                //        Spawn.GetComponent<SpawnPlayers>().player4.GetComponent<Shipmovement>().rb.Sleep();
+                //        col.enabled = true;
+                //        break;
+                //    default:
+                //        Debug.Log("Is borken");
+                //        break;
+
+                //}
+
+
+                // Rend.enabled = true;
+
+                StartCoroutine(StopDeath());
+
 
             }
-
-
-
         }
         print(life);
         print(stage);
@@ -287,6 +340,7 @@ public class Shipmovement : MonoBehaviour
 
     void ShootBullet()
     {
+        Debug.Log("lol nje");
         Instantiate(bullet, projectileSpawn.transform.position, transform.rotation);//new Vector3(transform.position.x, transform.position.y),transform.rotation);
     }
 
@@ -315,5 +369,30 @@ public class Shipmovement : MonoBehaviour
             slowdown = false;
         }
 
+    }
+
+    IEnumerator StopDeath()
+    {
+        yield return new WaitForSeconds(2f);
+        Debug.Log("not dead");
+        if (gameObject.CompareTag("Player1"))
+        {
+            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[0].transform.position;
+        }
+        else if (gameObject.CompareTag("Player2"))
+        {
+            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[1].transform.position;
+        }
+        else if (gameObject.CompareTag("Player3"))
+        {
+            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[2].transform.position;
+        }
+        else if (gameObject.CompareTag("Player4"))
+        {
+            transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[3].transform.position;
+        }
+
+        rb.Sleep();
+        col.enabled = true;
     }
 }
