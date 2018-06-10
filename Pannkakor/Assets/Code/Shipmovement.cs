@@ -17,6 +17,7 @@ public class Shipmovement : MonoBehaviour
     public ParticleSystem exhaust2;
     public ParticleSystem leftThruster;
     public ParticleSystem rightThruster;
+    public ParticleSystem Death;
     
     [Space]
     public Vector2 BoxSize,_ParticlePos;
@@ -26,18 +27,24 @@ public class Shipmovement : MonoBehaviour
     string fireButton;
     string grabButton;
     public bool GrabControllerBool;
+    public bool Tookdmg;
+    Renderer Rend;
+    Collider2D col;
+    public GameObject Spawn;
     
-
     private void Awake()
     {
         Instance = this;
     }
     void Start()
     {
-        
+        col = GetComponent<Collider2D>();
+        Rend = GetComponent<Renderer>();
+        Death.Stop();
         GrabControllerBool = false;
         switch (gameObject.tag)
         {
+            
             case "Player1":
                 axisNameH = "Horizontal";
                 axisNameV = "Vertical";
@@ -127,7 +134,20 @@ public class Shipmovement : MonoBehaviour
 
         if (Input.GetButtonDown(fireButton))
             ShootBullet();
-
+        if (Tookdmg)
+        {
+            
+            Rend.enabled = false;
+            col.enabled = false;
+            if (!Death.isPlaying)
+            {
+                transform.position = Spawn.GetComponent<SpawnPlayers>().spawnpoints[0].transform.position;
+                Rend.enabled = true;
+                col.enabled = true;
+                Tookdmg = false;
+            }
+        }
+      
         RaycastHit2D[] Temp = Physics2D.BoxCastAll(transform.position, BoxSize, angle, Quaternion.identity.eulerAngles, Distance);
 
 
@@ -137,18 +157,21 @@ public class Shipmovement : MonoBehaviour
             {
                 float dot = Vector2.Dot(transform.up, (Temp[i].transform.position - transform.position).normalized);
 
-
+               
                 if (Temp[i].transform.CompareTag("Astroid") && dot > DotValue && !GrabControllerBool)
                 {
-                    GrabControllerBool = true;
+                    
                     Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = true;
                     Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
-
+                    GrabControllerBool = true;
                 }
-                else if (GrabControllerBool)
+                if (GrabControllerBool)
                 {
+                    print(GrabControllerBool);
                     Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = false;
+                    
                 }
+              
 
                 Debug.Log("u hit the astroid");
 

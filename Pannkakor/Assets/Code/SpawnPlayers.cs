@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnPlayers : MonoBehaviour {
+
+    
+
     public GameObject playerPrefab;
     GameObject playerData;
     public GameObject[] spawnpoints;
     public Sprite[] playerSprites;
     public Vector3 playerScale;
-    GameObject player1, player2, player3, player4;
+  public  GameObject player1, player2, player3, player4;
 
-	// Use this for initialization
-	void Start () {
+   
+    // Use this for initialization
+    void Start () {
         if(GameObject.Find("Persistent PlayerData") == true)
         {
             playerData = GameObject.Find("Persistent PlayerData");

@@ -70,6 +70,8 @@ public class AstroidScript : MonoBehaviour
                 break;
             case "Player1":
                 Shipmovement.Instance.life--;
+                Shipmovement.Instance.Tookdmg = true;
+                Shipmovement.Instance.Death.Play();
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player2":
