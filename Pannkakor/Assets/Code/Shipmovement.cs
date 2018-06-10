@@ -25,11 +25,10 @@ public class Shipmovement : MonoBehaviour
     string fireButton;
     string grabButton;
     public bool GrabControllerBool;
-    LineRenderer LineRend;
+ 
     void Start()
     {
-        LineRend.GetComponent<LineRenderer>();
-        LineRend.enabled = false;
+       
         GrabControllerBool = false;
         switch (gameObject.tag)
         {
@@ -66,10 +65,7 @@ public class Shipmovement : MonoBehaviour
 
     void Update()
     {
-
-
         transform.Rotate(0, 0, -Input.GetAxis(axisNameH) * rotationForce * Time.deltaTime);
-
 
         rb.AddForce(transform.up * accelerationForce * Input.GetAxis(axisNameV));
 
@@ -120,43 +116,34 @@ public class Shipmovement : MonoBehaviour
 
         RaycastHit2D[] Temp = Physics2D.BoxCastAll(transform.position, BoxSize, angle, Quaternion.identity.eulerAngles, Distance);
 
-       
+
 
         for (int i = 0; i < Temp.Length; i++)
         {
             float dot = Vector2.Dot(transform.up, (Temp[i].transform.position - transform.position).normalized);
             print(dot);
 
-            // && 
-            if (Temp[i].transform.CompareTag("Astroid") && dot > DotValue && Input.GetKeyDown(KeyCode.X) && !GrabControllerBool)
+           
+            if (Temp[i].transform.CompareTag("Astroid") && dot > DotValue && Input.GetButtonDown(grabButton) && !GrabControllerBool)
             {
                 GrabControllerBool = true;
                 Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = true;
                 Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
-               
+
             }
-            else if (Input.GetKeyDown(KeyCode.X) && GrabControllerBool)
+            else if (Input.GetButtonDown(grabButton) && GrabControllerBool)
             {
                 Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = false;
             }
-  
+
             Debug.Log("u hit the astroid");
 
             if (Temp[i] && dot > DotValue)
             {
-                LineRend.enabled = true;
-                LineRend.SetPosition(0, transform.position);
-                LineRend.SetPosition(1, Temp[i].transform.position);
+              
                 Debug.DrawLine(transform.position, Temp[i].transform.position, Color.green);
             }
-            else
-            {
-                LineRend.enabled = false;
-            }
            
-           
-
-
         }
     }
 
