@@ -8,7 +8,7 @@ public class Shipmovement : MonoBehaviour
 {
     public int life = 3;
     public static Shipmovement Instance;
-    float accelerationForce = 20f;
+    float accelerationForce = 5f;
     float rotationForce = 100f;
     public GameObject bullet;
     public GameObject projectileSpawn;
@@ -18,6 +18,8 @@ public class Shipmovement : MonoBehaviour
     public ParticleSystem leftThruster;
     public ParticleSystem rightThruster;
     public ParticleSystem Death;
+
+    private bool slowdown = false;
     
     [Space]
     public Vector2 BoxSize,_ParticlePos;
@@ -122,13 +124,13 @@ public class Shipmovement : MonoBehaviour
         {
             rightThruster.gameObject.SetActive(true);
         }
-        else if (Input.GetAxis(axisNameH) == 0 && Input.GetAxis(axisNameV) >= 0)
+        else if (Input.GetAxis(axisNameH) == 0 && Input.GetAxis(axisNameV) == 0)
         {
             leftThruster.gameObject.SetActive(false);
             rightThruster.gameObject.SetActive(false);
         }
 
-        if (Input.GetAxis(axisNameV) == 0 && rb.angularVelocity != 0)
+        if (Input.GetAxis(axisNameV) < 0.1 && Input.GetAxis(axisNameV) > -0.1)
         {
             StabilizeShip();
         }
@@ -169,8 +171,16 @@ public class Shipmovement : MonoBehaviour
                 col.enabled = true;
                 Tookdmg = false;
             }
+
         }
-      
+        
+        
+        if(slowdown)
+        {
+            rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, 5 * Time.deltaTime);
+            rb.angularVelocity = Mathf.Lerp(rb.angularVelocity, 0, 5 * Time.deltaTime);
+        }
+              
         RaycastHit2D[] Temp = Physics2D.BoxCastAll(transform.position, BoxSize, angle, Quaternion.identity.eulerAngles, Distance);
 
 
@@ -223,14 +233,20 @@ public class Shipmovement : MonoBehaviour
     void StabilizeShip()
     {
         StartCoroutine(WaitStablelize());
-        rb.velocity = new Vector3(0, 0, 0);
-        rb.angularVelocity = 0;
-
     }
-
 
     IEnumerator WaitStablelize()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
+
+        if (Input.GetAxis(axisNameV) < 0.1 && Input.GetAxis(axisNameV) > -0.1)
+        {
+            slowdown = true;
+        }
+        else
+        {
+            slowdown = false;
+        }
+
     }
 }
