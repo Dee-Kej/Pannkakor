@@ -20,6 +20,7 @@ public class RestartGame : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Destroy(GameObject.Find("Persistent PlayerData"));
             SceneManager.LoadScene(0);
         }
     }
