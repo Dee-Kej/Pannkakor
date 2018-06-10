@@ -323,6 +323,7 @@ public class Shipmovement : MonoBehaviour
                 {
                     print(GrabControllerBool);
                     Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = false;
+                    Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = null;
                     GrabControllerBool = false;
                     
                 }
