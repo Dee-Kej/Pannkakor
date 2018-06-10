@@ -69,21 +69,24 @@ public class AstroidScript : MonoBehaviour
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player1":
-                Destroy(collision.gameObject);
+                Shipmovement.Instance.life--;
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player2":
-                Destroy(collision.gameObject);
+                Shipmovement.Instance.life--;
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player3":
-                Destroy(collision.gameObject);
+                Shipmovement.Instance.life--;
                 GetComponent<AudioSource>().Play();
                 break;
             case "Player4":
-                Destroy(collision.gameObject);
+                Shipmovement.Instance.life--;
                 GetComponent<AudioSource>().Play();
 
+                break;
+            case "Border":
+                Debug.Log("hit border");
                 break;
             default:
                 Debug.Log("Unknown Collision");

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Shipmovement : MonoBehaviour
 {
+    public int life = 3;
     public static Shipmovement Instance;
     float accelerationForce = 20f;
     float rotationForce = 100f;
@@ -25,7 +26,7 @@ public class Shipmovement : MonoBehaviour
     string fireButton;
     string grabButton;
     public bool GrabControllerBool;
-    LineRenderer LineRay;
+    
 
     private void Awake()
     {
@@ -33,9 +34,7 @@ public class Shipmovement : MonoBehaviour
     }
     void Start()
     {
-        LineRay = GetComponent<LineRenderer>();
-        LineRay.enabled = false;
-        LineRay.positionCount = 2;
+        
         GrabControllerBool = false;
         switch (gameObject.tag)
         {
@@ -72,6 +71,14 @@ public class Shipmovement : MonoBehaviour
 
     void Update()
     {
+        print(life);
+
+        if (life <= 0)
+        {
+            Destroy(gameObject);
+        }
+           
+
         transform.Rotate(0, 0, -Input.GetAxis(axisNameH) * rotationForce * Time.deltaTime);
 
         rb.AddForce(transform.up * accelerationForce * Input.GetAxis(axisNameV));
@@ -128,7 +135,6 @@ public class Shipmovement : MonoBehaviour
         for (int i = 0; i < Temp.Length; i++)
         {
             float dot = Vector2.Dot(transform.up, (Temp[i].transform.position - transform.position).normalized);
-            print(dot);
 
            
             if (Temp[i].transform.CompareTag("Astroid") && dot > DotValue && Input.GetButtonDown(grabButton) && !GrabControllerBool)
@@ -150,18 +156,7 @@ public class Shipmovement : MonoBehaviour
               
                 Debug.DrawLine(transform.position, Temp[i].transform.position, Color.green);
             }
-            if (GrabControllerBool && Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected == true)
-            {
-                LineRay.enabled = true;
-                LineRay.SetPosition(0, Temp[i].transform.position);
-                LineRay.SetPosition(1, transform.position);
-               
-         }
-            else if(!GrabControllerBool && Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected == false)
-            {
-                LineRay.enabled = false;
-            }
-
+       
         }
         
     }
