@@ -7,6 +7,8 @@ public class SpawnPlayers : MonoBehaviour {
     GameObject playerData;
     public GameObject[] spawnpoints;
     public Sprite[] playerSprites;
+    public Vector3 playerScale;
+    GameObject player1, player2, player3, player4;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +21,8 @@ public class SpawnPlayers : MonoBehaviour {
         {
             return;
         }
+
+        playerPrefab.transform.localScale = playerScale;
 
         if (playerData != null)
         {
@@ -51,6 +55,14 @@ public class SpawnPlayers : MonoBehaviour {
                 player4.tag = "Player4";
                 player4.GetComponent<SpriteRenderer>().sprite = playerSprites[3];
             }
+        }
+    }
+
+    void Update()
+    {
+        if(player1 )
+        {
+            return;
         }
     }
 }
