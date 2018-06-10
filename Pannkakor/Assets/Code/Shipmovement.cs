@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class Shipmovement : MonoBehaviour
 {
-
+    public int life = 3;
+    public static Shipmovement Instance;
     float accelerationForce = 20f;
     float rotationForce = 100f;
     public GameObject bullet;
@@ -25,11 +26,15 @@ public class Shipmovement : MonoBehaviour
     string fireButton;
     string grabButton;
     public bool GrabControllerBool;
-    LineRenderer LineRay;
+    
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
-        LineRay = GetComponent<LineRenderer>();
-        LineRay.enabled = false;
+        
         GrabControllerBool = false;
         switch (gameObject.tag)
         {
@@ -66,6 +71,14 @@ public class Shipmovement : MonoBehaviour
 
     void Update()
     {
+        print(life);
+
+        if (life <= 0)
+        {
+            Destroy(gameObject);
+        }
+
+
         transform.Rotate(0, 0, -Input.GetAxis(axisNameH) * rotationForce * Time.deltaTime);
 
         rb.AddForce(transform.up * accelerationForce * Input.GetAxis(axisNameV));
@@ -118,46 +131,34 @@ public class Shipmovement : MonoBehaviour
         RaycastHit2D[] Temp = Physics2D.BoxCastAll(transform.position, BoxSize, angle, Quaternion.identity.eulerAngles, Distance);
 
 
-
-        for (int i = 0; i < Temp.Length; i++)
+        if (Input.GetButtonDown(grabButton))
         {
-            float dot = Vector2.Dot(transform.up, (Temp[i].transform.position - transform.position).normalized);
-            print(dot);
-
-           
-            if (Temp[i].transform.CompareTag("Astroid") && dot > DotValue && Input.GetButtonDown(grabButton) && !GrabControllerBool)
+            for (int i = 0; i < Temp.Length; i++)
             {
-                GrabControllerBool = true;
-                Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = true;
-                Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
+                float dot = Vector2.Dot(transform.up, (Temp[i].transform.position - transform.position).normalized);
 
+
+                if (Temp[i].transform.CompareTag("Astroid") && dot > DotValue && !GrabControllerBool)
+                {
+                    GrabControllerBool = true;
+                    Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = true;
+                    Temp[i].transform.GetComponent<SpringJoint2D>().connectedBody = rb;
+
+                }
+                else if (GrabControllerBool)
+                {
+                    Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = false;
+                }
+
+                Debug.Log("u hit the astroid");
+
+                if (Temp[i] && dot > DotValue)
+                {
+
+                    Debug.DrawLine(transform.position, Temp[i].transform.position, Color.green);
+                }
             }
-            else if (Input.GetButtonDown(grabButton) && GrabControllerBool)
-            {
-                Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected = false;
-            }
-
-            Debug.Log("u hit the astroid");
-
-            if (Temp[i] && dot > DotValue)
-            {
-              
-                Debug.DrawLine(transform.position, Temp[i].transform.position, Color.green);
-            }
-            if (GrabControllerBool && Temp[i].transform.gameObject.GetComponent<AstroidScript>()._Connected == true)
-            {
-                LineRay.enabled = true;
-                LineRay.SetPosition(0, Temp[i].transform.position);
-                LineRay.SetPosition(1, transform.position);
-                
-         }
-            else
-            {
-                LineRay.enabled = false;
-            }
-
         }
-        
     }
 
     void ShootBullet()
