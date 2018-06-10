@@ -229,6 +229,7 @@ public class Shipmovement : MonoBehaviour
                 /*Spawn.GetComponent<SpawnPlayers>().player1.GetComponent<Shipmovement>().*/
                 Death.Play();
                 dead = true;
+                GetComponent<SpriteRenderer>().enabled = false;
 
                 //switch (gameObject.tag)
                 //{
@@ -394,5 +395,6 @@ public class Shipmovement : MonoBehaviour
 
         rb.Sleep();
         col.enabled = true;
+        GetComponent<SpriteRenderer>().enabled = true;
     }
 }
